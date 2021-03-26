@@ -1,0 +1,4 @@
+php artisan make:model Item -f -r
+php artisan make:model PrimaryCategory
+php artisan make:model SecondaryCategory
+php artisan make:model ItemCondition -f -r
