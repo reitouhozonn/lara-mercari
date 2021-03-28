@@ -129,10 +129,11 @@ return [
     */
 
     'custom' => [
-        'terms' => [
-            'required' => '登録には規約への同意が必須となります。',
+        'attribute-name' => [
+            'rule-name' => 'custom-message',
         ],
     ],
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Attributes
@@ -143,10 +144,6 @@ return [
     | of "email". This simply helps us make messages a little cleaner.
     |
     */
-    'attributes' => [
-        'name' => 'ユーザー名',
-        'email' => 'メールアドレス',
-        'password' => 'パスワード',
-        'terms' => '規約',
-        ],
+
+    'attributes' => [],
 ];
