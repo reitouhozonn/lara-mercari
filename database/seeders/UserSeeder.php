@@ -15,5 +15,6 @@ class UserSeeder extends Seeder
     {
         // factory(App\User::class, 10)->create();
         User::factory()->create();
+        
     }
 }
