@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MyPage\ProfileController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,4 +20,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+Route::prefix('/mypage')
+    ->name('mypage.')
+    ->middleware('auth')
+    ->group(function () {
+        Route::get('/edit-profile', [ProfileController::class, 'showProfileEditForm'])->name('edit-profile');
+        Route::post('/edit-profile', [ProfileController::class, 'editProfile'])->name('edit-profile');
+    });
