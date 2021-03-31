@@ -17,7 +17,10 @@
 
 						$table->id('id');
 
+                        $table->string('name');
+                        $table->unsignedBigInteger('sort_no');
 
+                        $table->timestamps();
 
 						// ----------------------------------------------------
 						// -- SELECT [item_conditions]--

@@ -2,6 +2,8 @@
     "cSpell.ignoreWords": [
         "csrf",
         "enderror",
+        "endforeach",
+        "endguest",
         "endsection",
         "save"
     ]

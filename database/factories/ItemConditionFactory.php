@@ -22,7 +22,8 @@ class ItemConditionFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => $this->faker->name,
+            'sort_no' => $this->faker->numberBetween(1, 100),
         ];
     }
 }
