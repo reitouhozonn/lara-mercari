@@ -17,7 +17,10 @@
 
 						$table->id('id');
 
+                        $table->string('name');
+                        $table->integer('sort_no');
 
+                        $table->timestamps();
 
 						// ----------------------------------------------------
 						// -- SELECT [primary_categories]--

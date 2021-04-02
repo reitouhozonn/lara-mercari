@@ -16,8 +16,15 @@
                 Schema::create("secondary_categories", function (Blueprint $table) {
 
 						$table->id('id');
-						$table->unsignedBigInteger('primary_category_id')->unsigned();
-						//$table->foreign("primary_category_id")->references("id")->on("primary_categories");
+						$table->unsignedBigInteger('primary_category_id')->nullable();
+
+                        $table->string('name');
+                        $table->integer('sort_no');
+
+                        $table->timestamps();
+
+
+						$table->foreign("primary_category_id")->references("id")->on("primary_categories");
 
 
 

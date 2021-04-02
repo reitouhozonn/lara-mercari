@@ -16,19 +16,25 @@
                 Schema::create("items", function (Blueprint $table) {
 
 						$table->id('id');
-						$table->unsignedBigInteger('buyer_id')->unsigned();
-						$table->unsignedBigInteger('seller_id')->nullable()->unsigned();
-						$table->unsignedBigInteger('secondry_category_id')->unsigned();
-						$table->integer('item_condition_id')->nullable()->unsigned();
+						$table->unsignedBigInteger('seller_id')->nullable();
+						$table->unsignedBigInteger('buyer_id')->nullable();
+						$table->unsignedBigInteger('secondary_category_id')->nullable();
+						$table->unsignedBigInteger('item_condition_id')->nullable();
 						
 
+                        $table->string('name');
+                        $table->text('description');
+                        $table->unsignedInteger('price');
+                        $table->string('state');
+
+                        $table->timestamps();
                     //*********************************
                     // Foreign KEY [ Uncomment if you want to use!! ]
                     //*********************************
-                        //$table->foreign("buyer_id")->references("id")->on("users");
-						//$table->foreign("seller_id")->references("id")->on("users");
-						//$table->foreign("secondry_category_id")->references("id")->on("secondary_categories");
-						//$table->foreign("item_condition_id")->references("id")->on("item_conditions");
+                        $table->foreign("buyer_id")->references("id")->on("users")->onDelete('cascade');
+						$table->foreign("seller_id")->references("id")->on("users")->onDelete('cascade');
+						$table->foreign('secondary_category_id')->references('id')->on('secondary_categories');
+						$table->foreign("item_condition_id")->references("id")->on("item_conditions");
 
 
 

@@ -19,6 +19,11 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory(10)->create();
         \App\Models\ItemCondition::factory(10)->create();
 
+        $this->call([
+            PrimaryCategorySeeder::class,
+            SecondaryCategorySeeder::class,
+        ]);
+
         DB::table('users')->insert([
             'name' => 'root',
             'email' => 'hogehoge@example.com',
