@@ -38,5 +38,5 @@ Route::prefix('/mypage')
         Route::get('/edit-profile', [ProfileController::class, 'showProfileEditForm'])->name('edit-profile');
         Route::post('/edit-profile', [ProfileController::class, 'editProfile'])->name('edit-profile');
 
-        Route::get('/sold-item', [SoldItemController::class, 'showSoldItems'])->name('sold-item');
+        Route::get('/sold-item', [SoldItemController::class, 'showSoldItems'])->name('sold-items');
     });
