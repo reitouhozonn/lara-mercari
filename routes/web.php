@@ -32,9 +32,11 @@ Route::prefix('/sell')
     });
 
 Route::prefix('/mypage')
-    ->name('mypage.edit-profile')
+    ->name('mypage.')
     ->middleware('auth')
     ->group(function () {
-        Route::get('/edit-profile', [ProfileController::class, 'showProfileEditForm']);
-        Route::post('/edit-profile', [ProfileController::class, 'editProfile']);
+        Route::get('/edit-profile', [ProfileController::class, 'showProfileEditForm'])->name('edit-profile');
+        Route::post('/edit-profile', [ProfileController::class, 'editProfile'])->name('edit-profile');
+
+        Route::get('/sold-item', [SoldItemController::class, 'showSoldItems'])->name('sold-item');
     });

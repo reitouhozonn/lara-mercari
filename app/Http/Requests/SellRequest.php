@@ -24,6 +24,7 @@ class SellRequest extends FormRequest
     public function rules()
     {
         return [
+            'item-image'   => ['required', 'file', 'image'],
             'name'        => ['required', 'string', 'max:255'],
             'description' => ['required', 'string', 'max:2000'],
             'category'    => ['required', 'integer'],
@@ -33,14 +34,15 @@ class SellRequest extends FormRequest
     }
 
     public function attributes()
-{
-    return [
-        'name'        => '商品名',
-        'description' => '商品の説明',
-        'category'    => 'カテゴリ',
-        'condition'   => '商品の状態',
-        'price'       => '販売価格',
-    ];
-}
+    {
+        return [
+            'item-image'  => '商品画像',
+            'name'        => '商品名',
+            'description' => '商品の説明',
+            'category'    => 'カテゴリ',
+            'condition'   => '商品の状態',
+            'price'       => '販売価格',
+        ];
+    }
 
 }

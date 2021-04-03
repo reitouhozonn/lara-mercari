@@ -23,6 +23,7 @@
 						
 
                         $table->string('name');
+                        $table->string('image_file_name');
                         $table->text('description');
                         $table->unsignedInteger('price');
                         $table->string('state');
