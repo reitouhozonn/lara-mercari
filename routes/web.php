@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MyPage\ProfileController;
 use App\Http\Controllers\SellController;
+use App\Http\Controllers\MyPage\SoldItemController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,6 +23,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('items/{item}', function ($id) {
+    return "商品説明";})->name('item');
 
 Route::prefix('/sell')
     ->name('sell')
@@ -38,5 +41,5 @@ Route::prefix('/mypage')
         Route::get('/edit-profile', [ProfileController::class, 'showProfileEditForm'])->name('edit-profile');
         Route::post('/edit-profile', [ProfileController::class, 'editProfile'])->name('edit-profile');
 
-        Route::get('/sold-item', [SoldItemController::class, 'showSoldItems'])->name('sold-items');
+        Route::get('/sold-items', [SoldItemController::class, 'showSoldItems'])->name('sold-items');
     });
