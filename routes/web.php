@@ -2,9 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ItemsController;
 use App\Http\Controllers\MyPage\ProfileController;
 use App\Http\Controllers\SellController;
 use App\Http\Controllers\MyPage\SoldItemController;
+use GuzzleHttp\Middleware;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,15 +19,25 @@ use App\Http\Controllers\MyPage\SoldItemController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('top');
+Route::get('/', [ItemsController::class, 'showItems'])->name('top');
 
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('items/{item}', function ($id) {
-    return "商品説明";})->name('item');
+Route::get('items/{item}', [ItemsController::class, 'showItemDetail'])->name('item');
+
+// Route::prefix('items')
+//     ->name('item')
+//     ->middleware('auth')
+//     ->group(function () {
+//         Route::get('sell', []);
+//         Route::post('sell', );
+//     });
+Route::get('items/{item}/buy', function () {
+    return '商品購入';})->name('item.buy');
+
+
+
 
 Route::prefix('/sell')
     ->name('sell')
