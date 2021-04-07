@@ -26,15 +26,13 @@ Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('items/{item}', [ItemsController::class, 'showItemDetail'])->name('item');
 
-// Route::prefix('items')
-//     ->name('item')
-//     ->middleware('auth')
-//     ->group(function () {
-//         Route::get('sell', []);
-//         Route::post('sell', );
-//     });
-Route::get('items/{item}/buy', function () {
-    return '商品購入';})->name('item.buy');
+Route::prefix('items')
+    ->name('item.buy')
+    ->middleware('auth')
+    ->group(function () {
+        Route::get('items/{item}/buy', [ItemsController::class, 'showByItemForm']);
+        Route::post('items/{item}/buy', [ItemsController::class, 'showByItemForm']);
+    });
 
 
 
