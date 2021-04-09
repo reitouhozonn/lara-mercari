@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             PrimaryCategorySeeder::class,
             SecondaryCategorySeeder::class,
+            // ItemConditionSeeder::class,
         ]);
 
         DB::table('users')->insert([

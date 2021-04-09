@@ -31,7 +31,7 @@ Route::prefix('items')
     ->middleware('auth')
     ->group(function () {
         Route::get('items/{item}/buy', [ItemsController::class, 'showByItemForm']);
-        Route::post('items/{item}/buy', [ItemsController::class, 'showByItemForm']);
+        Route::post('items/{item}/buy', [ItemsController::class, 'byItem']);
     });
 
 
