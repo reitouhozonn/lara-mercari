@@ -16,6 +16,10 @@ class Item extends Model
          // 購入済み
         const STATE_BOUGHT = 'bought';
 
+        protected $casts = [
+            'bought_at' => 'datetime',
+        ];
+
     public function SecondaryCategory(): BelongsTo
     {
         return $this->belongsTo(SecondaryCategory::class);
@@ -43,19 +47,5 @@ class Item extends Model
         return $this->state === self::STATE_BOUGHT;
     }
     
-
-    // public function solditems(): BelongsToMany
-    // {
-    //     return $this->belongsToMany('App\Models\Item',
-    //         'secondary_categories',
-    //         'primary_category_id',
-    //         'primary_category_id',
-    //     )->withTimestamps();
-    // }
-
-        // public function solditems()
-        // {
-        //     return $this->belongsTo(User::class);
-        // }
 
 }

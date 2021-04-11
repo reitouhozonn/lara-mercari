@@ -49,12 +49,11 @@
 
             <form id="buy-form" method="POST" action="{{route('item.buy', [$item->id])}}">
                 @csrf
-                <input type="hidden" id="card-token" name="card-token">
+                <input type="hidden" id="card-token" name="card-token" value="card-token">
             </form>
         </div>
     </div>
 </div>
-
 <script>
     var payjp = Payjp('{{config("payjp.public_key")}}')
 
@@ -68,19 +67,19 @@
     cvcElement.mount('#cvc-form')
 
     function onSubmit(event) {
-        const msgDom = document.querySelector('.card_form_alert');
-        msgDom.style.display = "none";
-
-        payjp.createToken(numberElement).then(function(r) {
-            if (r.error) {
-                msgDom.innerText = r.error.message;
-                msgDom.style.display = "block";
-                return;
-            }
-
-            document.querySelector('#card-token').value = r.id;
-            document.querySelector('#buy-form').submit();
-        })
-    }
+            const msgDom = document.querySelector('.card-form-alert');
+            msgDom.style.display = "none";
+    
+            payjp.createToken(numberElement).then(function(r) {
+                if (r.error) {
+                    msgDom.innerText = r.error.message;
+                    msgDom.style.display = "block";
+                    return;
+                }
+    
+                document.querySelector('#card-token').value = r.id;
+                document.querySelector('#buy-form').submit();
+            })
+        }
 </script>
 @endsection

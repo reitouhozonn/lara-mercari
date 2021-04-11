@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Item;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
+use Payjp\Charge;
 
 class ItemsController extends Controller
 {
@@ -48,10 +51,9 @@ class ItemsController extends Controller
         $items = $query->orderByRaw("FIELD(state, '" .Item::STATE_SELLING. "', '".Item::STATE_BOUGHT . "' )")
             ->orderBy('id', 'DESC')
             ->paginate(52);
-
-        return view('items.items',[
-            'items' => $items,
-        ]);
+            return view('items.items',[
+                'items' => $items,
+                ]);
     }
 
     public function showItemDetail(Item $item)
@@ -88,14 +90,13 @@ class ItemsController extends Controller
             Log::error($e);
             return redirect()->back()
                 ->with('type', 'denger')
-                ->with('message', '商品を購入しました。');
+                ->with('message', '商品の購入が失敗しました。');
         }
 
-        return redirect()->route('item', [
-            $item->id,
-            'message' => '商品を購入しました。',
-            ]);
+        return redirect()->route('item', [$item->id])
+            ->with('message', '商品を購入しました。');
     }
+
 
         private function settlement($itemID, $sellerID, $buyerID, $token)
         {
@@ -116,6 +117,15 @@ class ItemsController extends Controller
 
                 $seller->sales += $item->price;
                 $seller->save();
+
+                $charge = Charge::create([
+                    'card'      => $token,
+                    'amount'    => $item->price,
+                    'currency'  => 'jpy',
+                ]);
+                if (!$charge->captured) {
+                    throw new \Exception('支払い確定失敗');
+                }
 
             } catch (\Exception $e) {
                 DB::rollback();

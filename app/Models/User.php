@@ -50,17 +50,10 @@ class User extends Authenticatable
         );
     }
 
-
-
-
-    // public function solditems(): BelongsToMany
-    // {
-    //     return $this->belongsToMany(Item::class,
-    //         // 'items',
-    //         // 'seller_id',
-    //         // 'primary_category_id',
-    // );
-    // }
+    public function boughtItems(): HasMany
+    {
+        return $this->hasMany(Item::class, 'buyer_id');
+    }
 
 
 }

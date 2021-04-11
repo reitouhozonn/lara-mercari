@@ -1,12 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemsController;
 use App\Http\Controllers\MyPage\ProfileController;
 use App\Http\Controllers\SellController;
 use App\Http\Controllers\MyPage\SoldItemController;
-use GuzzleHttp\Middleware;
+use App\Http\Controllers\MyPage\BoughtItemsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,15 +22,14 @@ Route::get('/', [ItemsController::class, 'showItems'])->name('top');
 
 Auth::routes();
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('items/{item}', [ItemsController::class, 'showItemDetail'])->name('item');
 
 Route::prefix('items')
     ->name('item.buy')
     ->middleware('auth')
     ->group(function () {
-        Route::get('items/{item}/buy', [ItemsController::class, 'showByItemForm']);
-        Route::post('items/{item}/buy', [ItemsController::class, 'byItem']);
+        Route::get('/{item}/buy', [ItemsController::class, 'showByItemForm']);
+        Route::post('/{item}/buy', [ItemsController::class, 'byItem']);
     });
 
 
@@ -51,6 +49,6 @@ Route::prefix('/mypage')
     ->group(function () {
         Route::get('/edit-profile', [ProfileController::class, 'showProfileEditForm'])->name('edit-profile');
         Route::post('/edit-profile', [ProfileController::class, 'editProfile'])->name('edit-profile');
-
+        Route::get('/bought-items', [BoughtItemsController::class, 'showBoughtItems'])->name('bought-items');
         Route::get('/sold-items', [SoldItemController::class, 'showSoldItems'])->name('sold-items');
     });
